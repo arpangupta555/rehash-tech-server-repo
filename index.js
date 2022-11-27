@@ -38,6 +38,18 @@ async function run() {
             const product = await products.find(query).toArray();
             res.send(product);
         })
+
+
+        app.get('/category/:id', async (req, res) => {
+
+            const id = req.params.id;
+            const query = { category_id: id }
+            const productSingle = await products.find(query).toArray();
+            return res.send(productSingle);
+        })
+
+
+
     }
     finally {
 

@@ -19,6 +19,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         const service = client.db('rehashTech').collection('serviceCollection');
+        const products = client.db('rehashTech').collection('productCollection');
 
         app.get('/serviceCollection', async (req, res) => {
 
@@ -26,6 +27,16 @@ async function run() {
             const cursor = service.find(query);
             const services = await cursor.toArray();
             res.send(services);
+        })
+
+
+
+        app.get('/productCollection', async (req, res) => {
+
+            const query = {}
+
+            const product = await products.find(query).toArray();
+            res.send(product);
         })
     }
     finally {

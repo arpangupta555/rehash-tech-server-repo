@@ -20,6 +20,7 @@ async function run() {
     try {
         const service = client.db('rehashTech').collection('serviceCollection');
         const products = client.db('rehashTech').collection('productCollection');
+        const buyProductCollection = client.db('rehashTech').collection('buyProduct');
 
         app.get('/serviceCollection', async (req, res) => {
 
@@ -46,6 +47,16 @@ async function run() {
             const query = { category_id: id }
             const productSingle = await products.find(query).toArray();
             return res.send(productSingle);
+        })
+
+        app.post('/buyProducts', async (req, res) => {
+
+            const buy = req.body
+
+            const result = await buyProductCollection.insertOne(buy);
+            res.send(result);
+
+
         })
 
 

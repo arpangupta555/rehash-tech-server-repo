@@ -53,9 +53,10 @@ async function run() {
         app.post('/buyProducts', async (req, res) => {
 
             const buy = req.body
-            console.log(buy);
+
             const query = {
-                productName: buy.productName
+                productName: buy.productName,
+                email: buy.email
             }
 
             const alreadyBooked = await buyProductCollection.find(query).toArray()

@@ -21,6 +21,7 @@ async function run() {
         const service = client.db('rehashTech').collection('serviceCollection');
         const products = client.db('rehashTech').collection('productCollection');
         const buyProductCollection = client.db('rehashTech').collection('buyProduct');
+        const userCollection = client.db('rehashTech').collection('user');
 
         app.get('/serviceCollection', async (req, res) => {
 
@@ -50,6 +51,15 @@ async function run() {
             return res.send(productSingle);
         })
 
+        app.get('/buyProducts', async (req, res) => {
+
+            const email = req.query.email;
+            const query = { email: email };
+            const buyProduct = await buyProductCollection.find(query).toArray();
+            res.send(buyProduct);
+        })
+
+
         app.post('/buyProducts', async (req, res) => {
 
             const buy = req.body
@@ -71,6 +81,13 @@ async function run() {
             res.send(result);
 
 
+        })
+
+        app.post('/users', async (req, res) => {
+
+            const user = req.body;
+            const result = await userCollection.insertOne(user);
+            res.send(result);
         })
 
 

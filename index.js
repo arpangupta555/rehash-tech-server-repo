@@ -32,11 +32,12 @@ async function run() {
 
 
 
-        app.get('/productCollection', async (req, res) => {
+
+        app.get('/buyProduct', async (req, res) => {
 
             const query = {}
 
-            const product = await products.find(query).toArray();
+            const product = await buyProductCollection.find(query).toArray();
             res.send(product);
         })
 

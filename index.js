@@ -52,6 +52,12 @@ async function run() {
             res.send(services);
         })
 
+        app.post('/products', async (req, res) => {
+            const product = req.body;
+            const result = await products.insertOne(product);
+            res.send(result);
+        });
+
 
 
 
